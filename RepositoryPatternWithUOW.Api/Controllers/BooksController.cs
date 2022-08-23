@@ -22,5 +22,23 @@ namespace RepositoryPatternWithUOW.Api.Controllers
             return Ok(_booksRepository.GetById(1));
         }
 
+        [HttpGet("GetAll")]
+        public IActionResult GetAll ()
+        {
+            return Ok(_booksRepository.GetAll());
+        }
+
+        [HttpGet("GetByName")]
+        public IActionResult GetByName()
+        {
+            return Ok(_booksRepository.Find(b=>b.Title == "New Book", new[] {"Author"}));
+        }
+
+        [HttpGet("GetAllWithAuthors")]
+        public IActionResult GetAllWithAuthors()
+        {
+            return Ok(_booksRepository.FindAll(b => b.Title.Contains("New Book") , new[] { "Author" }));
+        }
+
     }
 }
